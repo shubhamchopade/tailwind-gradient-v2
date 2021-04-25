@@ -1,11 +1,11 @@
-import { useState } from "react";
 import useBrandColorName from "../hooks/useBrandColorName";
 import styled from "styled-components";
 import { HexColorPicker, HexColorInput } from "react-colorful";
+import { useColorState } from "../store/ColorStateProvider";
 
-export const GetBrandColor = () => {
-  const [brandColor, setBrandColor] = useState("#22ff00");
-  const brandColorName = useBrandColorName(brandColor);
+const GetBrandColor = () => {
+  const { brandColor, setBrandColor } = useColorState();
+  const brandColorName = useBrandColorName(brandColor, 10);
 
   const handleBrandColor = (color: any) => {
     setBrandColor(color);
@@ -13,19 +13,21 @@ export const GetBrandColor = () => {
 
   return (
     <div className="flex flex-col justify-center font-noto-sans">
-      <p className="text-gray-500 my-8 text-center">
+      <p className="text-gray-500 my-8 text-2xl">
         Choose a brand color to get started
       </p>
       <div className="flex">
         <div>
-          <ColorCircle color={brandColor}>
-            <p className="text-left">{brandColorName}</p>
+          <ColorCircle className="group" color={brandColor}>
+            <p className="text-xs uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
+              {brandColorName}
+            </p>
           </ColorCircle>
         </div>
-        <div>
+        <div className="ml-6">
           <HexColorPicker color={brandColor} onChange={handleBrandColor} />
           <HexColorInput
-            className="border rounded p-2 my-2 outline-none focus:ring"
+            className="border border-indigo-600 rounded p-2 my-2 outline-none focus:ring"
             color={brandColor}
             onChange={handleBrandColor}
           />
@@ -35,18 +37,13 @@ export const GetBrandColor = () => {
   );
 };
 
-const ColorSquare = styled.div.attrs((props) => ({
+export default GetBrandColor;
+
+const ColorCircle = styled.div.attrs((props) => ({
   style: {
     background: props.color || "#2a2a2a",
   },
 }))`
-  transition: background 0.5s ease;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 10%;
-  margin-right: 1rem;
-`;
-const ColorCircle = styled(ColorSquare)`
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
