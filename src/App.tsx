@@ -1,10 +1,14 @@
-import './App.css';
-import { GetTailwindConfigFile } from './components/GetTailwindConfigFile';
+import "./App.css";
+import BrandColorPalette from "./components/BrandColorPalette";
+import { GetBrandColor } from "./components/GetBrandColor";
 
 function App() {
   return (
     <div className="App">
-      <GetTailwindConfigFile />
+      <div className="flex justify-around items-center">
+        <GetBrandColor />
+        <BrandColorPalette />
+      </div>
     </div>
   );
 }
