@@ -2,13 +2,21 @@ import useBrandColorName from "../hooks/useBrandColorName";
 import styled from "styled-components";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useColorState } from "../store/ColorStateProvider";
+import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
 
 const GetBrandColor = () => {
   const { brandColor, setBrandColor } = useColorState();
-  const brandColorName = useBrandColorName(brandColor, 10);
+  const [localBrandColor, setLocalBrandColor] = useState("#212121");
+  const [value] = useDebounce(localBrandColor, 200);
+  // const brandColorName = useBrandColorName(value, 10);
+
+  useEffect(() => {
+    setBrandColor(value);
+  }, [brandColor, localBrandColor, value]);
 
   const handleBrandColor = (color: any) => {
-    setBrandColor(color);
+    setLocalBrandColor(color);
   };
 
   return (
@@ -20,7 +28,7 @@ const GetBrandColor = () => {
         <div>
           <ColorCircle className="group" color={brandColor}>
             <p className="text-xs uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
-              {brandColorName}
+              {localBrandColor}
             </p>
           </ColorCircle>
         </div>
@@ -50,4 +58,5 @@ const ColorCircle = styled.div.attrs((props) => ({
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.2s ease;
 `;

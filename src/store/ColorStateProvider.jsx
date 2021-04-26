@@ -15,7 +15,7 @@ export const useColorState = () => {
 };
 
 export const ColorStateProvider = ({ children }) => {
-  const [brandColor, setBrandColor] = useState("#22ff00");
+  const [brandColor, setBrandColor] = useState("#095216");
 
   const providerValue = {
     brandColor,

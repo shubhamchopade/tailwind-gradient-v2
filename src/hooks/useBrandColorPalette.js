@@ -8,6 +8,7 @@ function useBrandColorPalette(color) {
   let arr = [];
 
   for (let i = 0; i < 7; i++) {
+    i === 0 && arr.push({ h, s, l });
     if (h > 359) {
       h -= 350;
     } else {

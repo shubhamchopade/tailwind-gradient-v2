@@ -1,6 +1,8 @@
 import useBrandColorName from "../hooks/useBrandColorName";
 import useBrandColorPalette from "../hooks/useBrandColorPalette";
+import useGetLightnessPalette from "../hooks/useGetLightnessPalette";
 import useHSLToHex from "../hooks/useHSLToHex";
+import useHexToHSL from "../hooks/useHexToHSL";
 import { useColorState } from "../store/ColorStateProvider";
 
 const BrandColorPalette = () => {
@@ -10,11 +12,13 @@ const BrandColorPalette = () => {
   console.log(val);
 
   return (
-    <div className="h-64 overflow-auto">
-      {val.map((brandColor, index) => (
-        <BrandTile color={brandColor} key={index} />
-      ))}
-    </div>
+    <section className="flex items-start justify-start">
+      <div>
+        {val.map((brandColor, index) => (
+          <LightPalette color={brandColor} key={index} />
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -22,11 +26,21 @@ export default BrandColorPalette;
 
 const BrandTile = (props: any) => {
   let hex = useHSLToHex(props.color.h, props.color.s, props.color.l);
-  const brandColorName = useBrandColorName(hex, 10);
   return (
     <main className="flex items-center justify-between w-32 m-1">
-      <p className="text-xs">{brandColorName}</p>
-      <div className="w-8 h-8 rounded" style={{ background: hex }} />
+      <div className="w-8 h-8 rounded transition" style={{ background: hex }} />
     </main>
+  );
+};
+
+const LightPalette = (props: any) => {
+  const { color } = props;
+  const cols = useGetLightnessPalette(color);
+  return (
+    <div className="flex w-60">
+      {cols.map((bt, index) => (
+        <BrandTile color={bt} key={index} />
+      ))}
+    </div>
   );
 };
