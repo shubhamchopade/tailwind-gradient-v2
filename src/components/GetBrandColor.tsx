@@ -1,15 +1,19 @@
-import useBrandColorName from "../hooks/useBrandColorName";
 import styled from "styled-components";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useColorState } from "../store/ColorStateProvider";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import ColorName from "./ColorName";
 
 const GetBrandColor = () => {
-  const { brandColor, setBrandColor } = useColorState();
+  const {
+    brandColor,
+    setBrandColor,
+    showColorName,
+    setShowColorName,
+  } = useColorState();
   const [localBrandColor, setLocalBrandColor] = useState("#212121");
   const [value] = useDebounce(localBrandColor, 200);
-  // const brandColorName = useBrandColorName(value, 10);
 
   useEffect(() => {
     setBrandColor(value);
@@ -19,6 +23,10 @@ const GetBrandColor = () => {
     setLocalBrandColor(color);
   };
 
+  useEffect(() => {
+    setShowColorName(false);
+  }, [localBrandColor]);
+
   return (
     <div className="flex flex-col justify-center font-noto-sans">
       <p className="text-gray-500 my-8 text-2xl">
@@ -27,11 +35,21 @@ const GetBrandColor = () => {
       <div className="flex">
         <div>
           <ColorCircle className="group" color={brandColor}>
-            <p className="text-xs cursor-grab uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
-              {localBrandColor}
+            <p className="text-xs uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
+              {showColorName ? (
+                <ColorName value={value} />
+              ) : (
+                <button
+                  className="cursor-pointer"
+                  onClick={() => setShowColorName(!showColorName)}
+                >
+                  Get Name
+                </button>
+              )}
             </p>
           </ColorCircle>
         </div>
+
         <div className="ml-6">
           <HexColorPicker
             className="grab"

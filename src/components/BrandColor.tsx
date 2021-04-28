@@ -4,7 +4,7 @@ import GetBrandColor from "./GetBrandColor";
 export const BrandColor = () => {
   return (
     <div>
-      <div className="sm:flex justify-around items-center">
+      <div className="flex flex-col md:flex-row justify-around items-center">
         <GetBrandColor />
         <BrandColorPalette />
       </div>

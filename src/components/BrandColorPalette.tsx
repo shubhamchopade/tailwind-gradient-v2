@@ -4,9 +4,10 @@ import useGetLightnessPalette from "../hooks/useGetLightnessPalette";
 import useHSLToHex from "../hooks/useHSLToHex";
 import useHexToHSL from "../hooks/useHexToHSL";
 import { useColorState } from "../store/ColorStateProvider";
+import ColorName, { ColorNameHSL } from "./ColorName";
 
 const BrandColorPalette = () => {
-  const { brandColor } = useColorState();
+  const { brandColor, showColorName } = useColorState();
   const val = useBrandColorPalette(brandColor);
 
   console.log(val);
@@ -15,7 +16,10 @@ const BrandColorPalette = () => {
     <section className="flex items-start justify-start pr-4">
       <div>
         {val.map((brandColor, index) => (
-          <LightPalette color={brandColor} key={index} />
+          <div className="relative">
+            {showColorName && <ColorNameHSL color={brandColor} />}
+            <LightPalette color={brandColor} key={index} />
+          </div>
         ))}
       </div>
     </section>
@@ -27,7 +31,7 @@ export default BrandColorPalette;
 const BrandTile = (props: any) => {
   let hex = useHSLToHex(props.color.h, props.color.s, props.color.l);
   return (
-    <main className="flex items-center justify-between w-32 m-1">
+    <main className="flex items-center justify-between m-1">
       <div className="w-8 h-8 rounded transition" style={{ background: hex }} />
     </main>
   );

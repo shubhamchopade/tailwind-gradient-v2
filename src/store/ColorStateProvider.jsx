@@ -16,10 +16,13 @@ export const useColorState = () => {
 
 export const ColorStateProvider = ({ children }) => {
   const [brandColor, setBrandColor] = useState("#095216");
+  const [showColorName, setShowColorName] = useState(false);
 
   const providerValue = {
     brandColor,
     setBrandColor,
+    showColorName,
+    setShowColorName,
   };
 
   return (
