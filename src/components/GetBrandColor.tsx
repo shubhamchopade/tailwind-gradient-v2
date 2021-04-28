@@ -27,13 +27,18 @@ const GetBrandColor = () => {
       <div className="flex">
         <div>
           <ColorCircle className="group" color={brandColor}>
-            <p className="text-xs uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
+            <p className="text-xs cursor-grab uppercase text-left bg-gray-600 text-white p-1 rounded-md shadow group-hover:bg-gray-700">
               {localBrandColor}
             </p>
           </ColorCircle>
         </div>
         <div className="ml-6">
-          <HexColorPicker color={brandColor} onChange={handleBrandColor} />
+          <HexColorPicker
+            className="grab"
+            color={brandColor}
+            onChange={handleBrandColor}
+          />
+
           <HexColorInput
             className="border border-indigo-600 rounded p-2 my-2 outline-none focus:ring"
             color={brandColor}

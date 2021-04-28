@@ -42,3 +42,10 @@
 ::-webkit-scrollbar-thumb:active {
   background: #a09e9e;
 }
+
+.grab {
+  cursor: grab !important;
+}
+.grab:active {
+  cursor: grabbing !important;
+}

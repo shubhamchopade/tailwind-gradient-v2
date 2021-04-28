@@ -7,6 +7,10 @@ module.exports = {
         "noto-sans": ["Noto Sans", "sans-serif"],
         "noto-serif": ["Noto Serif", "serif"],
       },
+      cursor: {
+        grabbing: "grabbing",
+        grab: "grab",
+      },
     },
   },
   variants: {

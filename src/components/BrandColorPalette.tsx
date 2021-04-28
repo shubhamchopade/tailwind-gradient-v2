@@ -12,7 +12,7 @@ const BrandColorPalette = () => {
   console.log(val);
 
   return (
-    <section className="flex items-start justify-start">
+    <section className="flex items-start justify-start pr-4">
       <div>
         {val.map((brandColor, index) => (
           <LightPalette color={brandColor} key={index} />
