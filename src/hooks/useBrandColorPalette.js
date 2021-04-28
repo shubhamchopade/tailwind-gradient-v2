@@ -20,7 +20,7 @@ function useBrandColorPalette(color) {
     if (s > 97) {
       s -= 90 * Math.random();
     } else if (s < 30) {
-      s += 50;
+      s += 50 * Math.random();
     } else {
       s += 2 * Math.random();
     }
