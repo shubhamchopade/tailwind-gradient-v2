@@ -12,10 +12,12 @@ function useGetLightnessPalette(hsl) {
   //   getIndex(l)
   // );
   let lightness = l;
+  let saturation = s;
   for (let i = getIndex(l); i < palette.length; i++) {
     palette[i] = { h, s, l: lightness };
     if (lightness > 90) {
       lightness -= 90;
+      saturation -= 10;
     } else if (lightness < 10) {
       lightness += 10;
     } else {
@@ -26,6 +28,7 @@ function useGetLightnessPalette(hsl) {
   for (let i = 0; i < getIndex(l); i++) {
     if (lightness > 90) {
       lightness -= 90;
+      saturation -= 10;
     } else if (lightness < 10) {
       lightness += 10;
     } else {
@@ -33,7 +36,7 @@ function useGetLightnessPalette(hsl) {
     }
     palette[i] = { h, s, l: lightness };
   }
-  console.log(palette, getIndex(l));
+  // console.log(palette, getIndex(l));
   return palette;
 }
 

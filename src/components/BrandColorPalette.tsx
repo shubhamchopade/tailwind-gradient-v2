@@ -5,12 +5,19 @@ import useHSLToHex from "../hooks/useHSLToHex";
 import useHexToHSL from "../hooks/useHexToHSL";
 import { useColorState } from "../store/ColorStateProvider";
 import ColorName, { ColorNameHSL } from "./ColorName";
+import { useEffect } from "react";
 
 const BrandColorPalette = () => {
-  const { brandColor, showColorName } = useColorState();
+  const {
+    brandColor,
+    showColorName,
+    setBrandColorPaletteArray,
+  } = useColorState();
   const val = useBrandColorPalette(brandColor);
 
-  console.log(val);
+  useEffect(() => {
+    setBrandColorPaletteArray(val);
+  }, [brandColor]);
 
   return (
     <section className="flex items-start justify-start pr-4">
@@ -32,7 +39,10 @@ const BrandTile = (props: any) => {
   let hex = useHSLToHex(props.color.h, props.color.s, props.color.l);
   return (
     <main className="flex items-center justify-between m-1">
-      <div className="w-8 h-8 rounded transition" style={{ background: hex }} />
+      <div
+        className="w-8 h-8 rounded transition transform hover:scale-105"
+        style={{ background: hex }}
+      />
     </main>
   );
 };

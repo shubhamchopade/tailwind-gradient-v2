@@ -11,6 +11,7 @@ const GetBrandColor = () => {
     setBrandColor,
     showColorName,
     setShowColorName,
+    brandColorPaletteArray,
   } = useColorState();
   const [localBrandColor, setLocalBrandColor] = useState("#212121");
   const [value] = useDebounce(localBrandColor, 200);
@@ -22,6 +23,8 @@ const GetBrandColor = () => {
   const handleBrandColor = (color: any) => {
     setLocalBrandColor(color);
   };
+
+  console.log(brandColorPaletteArray);
 
   useEffect(() => {
     setShowColorName(false);
@@ -40,7 +43,7 @@ const GetBrandColor = () => {
                 <ColorName value={value} />
               ) : (
                 <button
-                  className="cursor-pointer"
+                  className="outline-none shadow focus:shadow-md"
                   onClick={() => setShowColorName(!showColorName)}
                 >
                   Get Name

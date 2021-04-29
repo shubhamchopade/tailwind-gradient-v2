@@ -5,6 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "dom",
