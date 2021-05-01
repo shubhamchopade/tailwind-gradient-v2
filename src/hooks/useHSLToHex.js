@@ -1,4 +1,5 @@
-function useHSLToHex(h, s, l) {
+function useHSLToHex(hsl) {
+  let { h, s, l } = hsl;
   function HSLToRGB(h, s, l) {
     // Must be fractions of 1
     s /= 100;

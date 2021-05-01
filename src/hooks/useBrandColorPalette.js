@@ -2,9 +2,7 @@ import useHexToHSL from "./useHexToHSL";
 
 function useBrandColorPalette(color) {
   const hsl = useHexToHSL(color);
-  let h = hsl.h;
-  let s = hsl.s;
-  let l = hsl.l;
+  let { h, s, l } = hsl;
   let arr = [];
 
   for (let i = 0; i < 7; i++) {

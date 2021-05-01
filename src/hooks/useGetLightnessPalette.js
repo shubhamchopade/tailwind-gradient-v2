@@ -1,4 +1,6 @@
-function useGetLightnessPalette(hsl) {
+import useHSLToHex from "./useHSLToHex";
+
+function useGetLightnessPalette(hsl, id) {
   let palette = new Array(10);
   let { h, s, l } = hsl;
 
@@ -6,15 +8,16 @@ function useGetLightnessPalette(hsl) {
     return Math.round(color / 10);
   }
 
-  // console.log(
-  //   "palette",
-  //   palette.sort((a, b) => (a.l > b.l ? 1 : b.l > a.l ? -1 : 0)),
-  //   getIndex(l)
-  // );
   let lightness = l;
   let saturation = s;
   for (let i = getIndex(l); i < palette.length; i++) {
-    palette[i] = { h, s, l: lightness };
+    const hslObj = { h, s: saturation, l: lightness };
+    palette[i] = {
+      id: `${id}-${i}`,
+      number: i,
+      hex: useHSLToHex(hslObj),
+      hsl: { h, s: saturation, l: lightness },
+    };
     if (lightness > 90) {
       lightness -= 90;
       saturation -= 10;
@@ -34,7 +37,13 @@ function useGetLightnessPalette(hsl) {
     } else {
       lightness += 8;
     }
-    palette[i] = { h, s, l: lightness };
+    const hslObj = { h, s: saturation, l: lightness };
+    palette[i] = {
+      id: `${id}-${i}`,
+      number: i,
+      hex: useHSLToHex(hslObj),
+      hsl: { h, s: saturation, l: lightness },
+    };
   }
   // console.log(palette, getIndex(l));
   return palette;
