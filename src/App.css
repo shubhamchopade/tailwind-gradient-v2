@@ -49,3 +49,18 @@
 .grab:active {
   cursor: grabbing !important;
 }
+
+.color-focus:hover {
+  display: block;
+}
+
+.color-focus::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0px;
+  width: 1rem;
+  height: 1rem;
+  background-color: blueviolet;
+  display: none;
+}

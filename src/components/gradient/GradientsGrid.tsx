@@ -1,6 +1,7 @@
+import React from "react";
 import { GradientBlock } from "./GradientBlock";
 
-const GradientsGrid = () => {
+const GradientsGrid: React.FunctionComponent = () => {
   return (
     <>
       <p className="txt">Tailwind Gradients based on the above color palette</p>

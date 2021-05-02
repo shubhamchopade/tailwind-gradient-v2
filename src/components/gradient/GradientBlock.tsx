@@ -1,12 +1,18 @@
+import React from "react";
 import styled from "styled-components";
-import React, { forwardRef } from "react";
 
 type ContainerType = {
-  color?: any; ///Passing Optional Props
+  color: string; ///Passing Optional Props
+  children?: React.ReactNode;
 };
 
-const GradientBlock = (color: any) => {
-  return <StyledGradientBlock color={color} />;
+const GradientBlock: React.FC<ContainerType> = ({ color, children }) => {
+  return (
+    <div>
+      {children}
+      <StyledGradientBlock color={color} />
+    </div>
+  );
 };
 
 const StyledGradientBlock = styled.div<ContainerType>`
@@ -14,8 +20,7 @@ const StyledGradientBlock = styled.div<ContainerType>`
   height: 8rem;
   border-radius: 1rem;
   margin: 0.7rem;
-  background: ${(props): any =>
-    props.color.color ? props.color.color : "#000"};
+  background: ${(props): any => (props.color ? props.color : "#000")};
 `;
 
 export { GradientBlock };
