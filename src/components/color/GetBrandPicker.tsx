@@ -27,7 +27,6 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setBrandColor,
     showColorName,
     setShowColorName,
-    brandColorPaletteArray,
     setBrandColorPaletteArray,
   } = useColorState();
   const [localBrandColor, setLocalBrandColor] = useState("#095216");
@@ -44,7 +43,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setLocalBrandColor(color);
   };
 
-  console.log(brandColorPaletteArray);
+  // console.log(brandColorPaletteArray);
 
   return (
     <div className="flex flex-col justify-center font-noto-sans">

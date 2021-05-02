@@ -8,8 +8,6 @@ function useGetColorArray(hex) {
   const brandArr = useBrandColorPalette(hex);
   const { showColorName } = useColorState();
 
-  // 2. Get lightness palette for each color
-
   const latestArr = brandArr.map((hsl) => {
     const paletteHex = useHSLToHex(hsl);
     const id = paletteHex.split("#")[1];

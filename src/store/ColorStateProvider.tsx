@@ -9,6 +9,8 @@ interface ProviderProps {
   setShowColorName: React.Dispatch<React.SetStateAction<boolean>>;
   brandColorPaletteArray: {}[];
   setBrandColorPaletteArray: Function;
+  getConfigFile: boolean;
+  setGetConfigFile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // interface ColorArrProps {
@@ -41,6 +43,7 @@ export const useColorState: Function = () => {
 export const ColorStateProvider: React.FC = ({ children }) => {
   const [brandColor, setBrandColor] = useState("#095216");
   const [showColorName, setShowColorName] = useState(false);
+  const [getConfigFile, setGetConfigFile] = useState(false);
   const [brandColorPaletteArray, setBrandColorPaletteArray] = useState([]);
 
   const providerValue: ProviderProps = {
@@ -50,6 +53,8 @@ export const ColorStateProvider: React.FC = ({ children }) => {
     setShowColorName,
     brandColorPaletteArray,
     setBrandColorPaletteArray,
+    getConfigFile,
+    setGetConfigFile,
   };
 
   return (
