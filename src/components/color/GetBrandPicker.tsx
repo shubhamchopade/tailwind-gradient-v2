@@ -29,8 +29,8 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setShowColorName,
     setBrandColorPaletteArray,
   } = useColorState();
-  const [localBrandColor, setLocalBrandColor] = useState("#095216");
-  const [debouncedValue] = useDebounce(localBrandColor, 200);
+  const [localBrandColor, setLocalBrandColor] = useState("#ac26cd");
+  const [debouncedValue] = useDebounce(localBrandColor, 300);
   const brandArrWithShades = useGetColorArray(debouncedValue);
   const hsl = useHexToHSL(debouncedValue);
 
@@ -38,6 +38,10 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setBrandColor(debouncedValue);
     setBrandColorPaletteArray(brandArrWithShades);
   }, [brandColor, localBrandColor, debouncedValue, showColorName]);
+
+  useEffect(() => {
+    setShowColorName(false);
+  }, [localBrandColor]);
 
   const handleBrandColor = (color: string) => {
     setLocalBrandColor(color);

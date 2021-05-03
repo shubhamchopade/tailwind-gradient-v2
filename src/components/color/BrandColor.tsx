@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useColorState } from "../../store/ColorStateProvider";
 import Modal from "../common/Modal";
 import TailwindConfig from "../common/TailwindConfig";
 import ColorGrid from "./ColorGrid";
@@ -6,6 +7,7 @@ import GetBrandPicker from "./GetBrandPicker";
 
 export const BrandColor: React.FunctionComponent = () => {
   const [showConfigFile, setShowConfigFile] = useState(false);
+  const { setShowColorName } = useColorState();
 
   interface BtnProps {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -22,10 +24,15 @@ export const BrandColor: React.FunctionComponent = () => {
     </button>
   );
 
+  function handleClick() {
+    setShowColorName(true);
+    setShowConfigFile(true);
+  }
+
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between items-center relative">
-        <GetConfigFileButton onClick={() => setShowConfigFile(true)} />
+        <GetConfigFileButton onClick={handleClick} />
         <GetBrandPicker />
         <ColorGrid />
         <Modal showModal={showConfigFile} setShowModal={setShowConfigFile}>
