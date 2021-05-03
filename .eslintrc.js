@@ -12,7 +12,6 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    indent: ["error", 2],
     "@typescript-eslint/no-unused-vars": [
       "error",
       { vars: "all", args: "after-used", ignoreRestSiblings: false },
