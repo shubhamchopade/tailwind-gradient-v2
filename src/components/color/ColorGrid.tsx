@@ -52,7 +52,7 @@ const ColorGrid: React.FunctionComponent = () => {
               <CopyToClipboard text={shade.hex}>
                 <button
                   key={index}
-                  className="h-6 w-6 sm:h-8 sm:w-8 m-0.5 rounded transition transform hover:scale-105"
+                  className="h-6 w-6 sm:h-8 sm:w-8 m-0.5 rounded transition outline-none focus:ring-1 btn-color"
                   style={{ background: shade.hex }}
                   onClick={() => handleCopy(shade.hex)}
                 />

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import CopyToClipboard from "react-copy-to-clipboard";
+import useGetTailwindConfig from "../../hooks/useGetTailwindConfig";
 
 interface Props {
   showModal: boolean;
@@ -8,12 +10,31 @@ interface Props {
 const Modal: React.FunctionComponent<Props> = (props) => {
   const { children, showModal, setShowModal } = props;
   const [numberState, setNumberState] = useState(0);
+  // const config = useGetTailwindConfig();
+  const [clipboard, setClipboard] = useState(false);
+  const [, setTriggerCopy] = useState(false);
+  const copyCode = useGetTailwindConfig(true);
   const commmonClasses =
     "border-4 px-2 py-1 border-transparent hover:border-darkblue-8 rounded-xl cursor-pointer";
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setClipboard(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [copyCode]);
+
+  function handleClick() {
+    setClipboard(true);
+    setTriggerCopy(true);
+  }
+
   return (
     <div
-      className="fixed z-10 inset-0 overflow-hidden"
-      style={{ display: showModal ? "block" : "none" }}
+      className={`fixed z-10 inset-0 overflow-hidden transition-all transform ${
+        showModal ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+      }`}
+      // style={{ display: showModal ? "block" : "none" }}
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -54,25 +75,31 @@ const Modal: React.FunctionComponent<Props> = (props) => {
             </svg>
 
             <div className="p-6 mx-auto">
-              <button
-                type="button"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-8 py-4 bg-darkblue-6 text-2xl font-medium text-white hover:bg-darkblue-5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-darkblue-5"
-              >
-                <svg
-                  width="35"
-                  height="34"
-                  viewBox="0 0 35 34"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <CopyToClipboard text={copyCode}>
+                <button
+                  onClick={handleClick}
+                  type="button"
+                  className="w-80 inline-flex justify-center rounded-md border border-transparent shadow-sm px-6 py-4 bg-darkblue-6 text-2xl font-medium text-white hover:bg-darkblue-5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-darkblue-5"
                 >
-                  <path
-                    d="M30.8285 0.35791H14.0393C12.1874 0.35791 10.6814 1.8639 10.6814 3.71575V10.4314H3.96575C2.1139 10.4314 0.60791 11.9374 0.60791 13.7893V30.5785C0.60791 32.4303 2.1139 33.9363 3.96575 33.9363H20.755C22.6068 33.9363 24.1128 32.4303 24.1128 30.5785V23.8628H30.8285C32.6803 23.8628 34.1863 22.3568 34.1863 20.505V3.71575C34.1863 1.8639 32.6803 0.35791 30.8285 0.35791ZM3.96575 30.5785V13.7893H20.755L20.7583 30.5785H3.96575ZM30.8285 20.505H24.1128V13.7893C24.1128 11.9374 22.6068 10.4314 20.755 10.4314H14.0393V3.71575H30.8285V20.505Z"
-                    fill="white"
-                  />
-                </svg>
-                <p className="ml-4">Copy to Clipboard</p>
-              </button>
-
+                  {!clipboard && (
+                    <svg
+                      width="35"
+                      height="34"
+                      viewBox="0 0 35 34"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M30.8285 0.35791H14.0393C12.1874 0.35791 10.6814 1.8639 10.6814 3.71575V10.4314H3.96575C2.1139 10.4314 0.60791 11.9374 0.60791 13.7893V30.5785C0.60791 32.4303 2.1139 33.9363 3.96575 33.9363H20.755C22.6068 33.9363 24.1128 32.4303 24.1128 30.5785V23.8628H30.8285C32.6803 23.8628 34.1863 22.3568 34.1863 20.505V3.71575C34.1863 1.8639 32.6803 0.35791 30.8285 0.35791ZM3.96575 30.5785V13.7893H20.755L20.7583 30.5785H3.96575ZM30.8285 20.505H24.1128V13.7893C24.1128 11.9374 22.6068 10.4314 20.755 10.4314H14.0393V3.71575H30.8285V20.505Z"
+                        fill="white"
+                      />
+                    </svg>
+                  )}
+                  <p className="ml-3">
+                    {clipboard ? "Copied" : "Copy to Clipboard"}
+                  </p>
+                </button>
+              </CopyToClipboard>
               <div className="flex justify-around items-center font-medium text-xl mt-4 ">
                 <h4>Numbering Style</h4>
                 <span
