@@ -7,7 +7,7 @@ const TailwindConfig = () => {
     return { __html: config };
   }
 
-  console.log(config);
+  // console.log(config);
   return <div dangerouslySetInnerHTML={createMarkup()} />;
 };
 

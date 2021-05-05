@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useColorState } from "../../store/ColorStateProvider";
+import OverlayCopiedToClipboard from "../common/OverlayCopiedToClipboard";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 interface ColorArrProps {
   id: number | string;
@@ -17,10 +19,28 @@ interface Shades {
 }
 
 const ColorGrid: React.FunctionComponent = () => {
-  const { brandColorPaletteArray } = useColorState();
-  // console.log(brandColorPaletteArray);
+  const {
+    brandColorPaletteArray,
+    currentCopiedHex,
+    setCurrentCopiedHex,
+  } = useColorState();
+
+  const handleCopy = (hex: string) => {
+    setCurrentCopiedHex(hex);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentCopiedHex("");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [currentCopiedHex]);
+
   return (
-    <div className="mt-12 sm:ml-0 ml-16">
+    <div className="mt-12 sm:mr-32 mr-0 sm:ml-0 ml-16 relative">
+      {currentCopiedHex.length > 0 && (
+        <OverlayCopiedToClipboard hex={currentCopiedHex} />
+      )}
       {brandColorPaletteArray.map((props: ColorArrProps, idx: number) => {
         const { name, lightnessPalette } = props;
         return (
@@ -29,11 +49,14 @@ const ColorGrid: React.FunctionComponent = () => {
               {name}
             </p>
             {lightnessPalette?.map((shade, index) => (
-              <div
-                key={index}
-                className="h-6 w-6 sm:h-8 sm:w-8 m-0.5 rounded transition transform hover:scale-105"
-                style={{ background: shade.hex }}
-              />
+              <CopyToClipboard text={shade.hex}>
+                <button
+                  key={index}
+                  className="h-6 w-6 sm:h-8 sm:w-8 m-0.5 rounded transition transform hover:scale-105"
+                  style={{ background: shade.hex }}
+                  onClick={() => handleCopy(shade.hex)}
+                />
+              </CopyToClipboard>
             ))}
           </div>
         );

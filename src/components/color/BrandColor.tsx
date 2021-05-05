@@ -18,7 +18,7 @@ export const BrandColor: React.FunctionComponent = () => {
   }) => (
     <button
       onClick={onClick}
-      className="btn fixed z-10 top-8 -right-8 transform hover:-translate-x-3 transition-transform shadow-md rounded-full bg-darkblue-6 text-white pl-4 py-2 pr-12"
+      className="btn fixed z-20 top-8 -right-8 transform hover:-translate-x-3 transition-transform shadow-md rounded-full bg-darkblue-6 text-white pl-4 py-2 pr-12"
     >
       Get Tailwind Config
     </button>
