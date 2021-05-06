@@ -11,6 +11,8 @@ interface ProviderProps {
   setBrandColorPaletteArray: Function;
   getConfigFile: boolean;
   setGetConfigFile: React.Dispatch<React.SetStateAction<boolean>>;
+  currentCopiedHex: string;
+  setCurrentCopiedHex: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // interface ColorArrProps {
@@ -45,6 +47,7 @@ export const ColorStateProvider: React.FC = ({ children }) => {
   const [showColorName, setShowColorName] = useState(false);
   const [getConfigFile, setGetConfigFile] = useState(false);
   const [brandColorPaletteArray, setBrandColorPaletteArray] = useState([]);
+  const [currentCopiedHex, setCurrentCopiedHex] = useState("");
 
   const providerValue: ProviderProps = {
     brandColor,
@@ -55,6 +58,8 @@ export const ColorStateProvider: React.FC = ({ children }) => {
     setBrandColorPaletteArray,
     getConfigFile,
     setGetConfigFile,
+    currentCopiedHex,
+    setCurrentCopiedHex,
   };
 
   return (
