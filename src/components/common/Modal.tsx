@@ -22,7 +22,7 @@ const Modal: React.FunctionComponent<Props> = (props) => {
       setClipboard(false);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [copyCode]);
+  }, [copyCode, clipboard]);
 
   function handleClick() {
     setClipboard(true);

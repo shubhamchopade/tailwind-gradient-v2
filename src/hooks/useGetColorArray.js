@@ -8,6 +8,8 @@ function useGetColorArray(hex) {
   const brandArr = useBrandColorPalette(hex);
   const { showColorName } = useColorState();
 
+  // console.log(brandArr);
+
   const latestArr = brandArr.map((hsl) => {
     const paletteHex = useHSLToHex(hsl);
     const id = paletteHex.split("#")[1];
