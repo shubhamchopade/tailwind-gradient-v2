@@ -19,11 +19,8 @@ interface Shades {
 }
 
 const ColorGrid: React.FunctionComponent = () => {
-  const {
-    brandColorPaletteArray,
-    currentCopiedHex,
-    setCurrentCopiedHex,
-  } = useColorState();
+  const { brandColorPaletteArray, currentCopiedHex, setCurrentCopiedHex } =
+    useColorState();
 
   const handleCopy = (hex: string) => {
     setCurrentCopiedHex(hex);
@@ -49,9 +46,8 @@ const ColorGrid: React.FunctionComponent = () => {
               {name}
             </p>
             {lightnessPalette?.map((shade, index) => (
-              <CopyToClipboard text={shade.hex}>
+              <CopyToClipboard text={shade.hex} key={index}>
                 <button
-                  key={index}
                   className="h-6 w-6 sm:h-8 sm:w-8 m-0.5 rounded transition outline-none focus:ring-1 btn-color"
                   style={{ background: shade.hex }}
                   onClick={() => handleCopy(shade.hex)}

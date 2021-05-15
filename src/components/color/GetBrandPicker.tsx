@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import useHexToHSL from "../../hooks/useHexToHSL";
 import useGetColorArray from "../../hooks/useGetColorArray";
+import LikesCounter from "../supabase/LikesCounter";
+import TopLikedColors from "../supabase/TopLikedColors";
 
 // interface ColorArrProps {
 //   id: number | string;
@@ -37,7 +39,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
   useEffect(() => {
     setBrandColor(debouncedValue);
     setBrandColorPaletteArray(brandArrWithShades);
-  }, [brandColor, localBrandColor, debouncedValue, showColorName]);
+  }, [localBrandColor, debouncedValue, showColorName]);
 
   useEffect(() => {
     setShowColorName(false);
@@ -47,7 +49,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setLocalBrandColor(color);
   };
 
-  // console.log(brandColorPaletteArray);
+  // console.log(brandArrWithShades);
 
   return (
     <div className="flex flex-col justify-center font-noto-sans">
@@ -86,6 +88,8 @@ const GetBrandPicker: React.FunctionComponent = () => {
           />
         </div>
       </div>
+      <LikesCounter />
+      <TopLikedColors />
     </div>
   );
 };
