@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useColorState } from "../../store/ColorStateProvider";
 import Modal from "../common/Modal";
 import TailwindConfig from "../common/TailwindConfig";
+import BrandColorPreview from "./BrandColorPreview";
 import ColorGrid from "./ColorGrid";
 import GetBrandPicker from "./GetBrandPicker";
 
@@ -34,6 +35,7 @@ export const BrandColor: React.FunctionComponent = () => {
       <div className="flex flex-col md:flex-row justify-between items-center relative">
         <GetConfigFileButton onClick={handleClick} />
         <GetBrandPicker />
+        <BrandColorPreview />
         <ColorGrid />
         <Modal showModal={showConfigFile} setShowModal={setShowConfigFile}>
           <TailwindConfig />

@@ -3,9 +3,7 @@ import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useColorState } from "../../store/ColorStateProvider";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import useHexToHSL from "../../hooks/useHexToHSL";
 import useGetColorArray from "../../hooks/useGetColorArray";
-import LikesCounter from "../supabase/LikesCounter";
 import TopLikedColors from "../supabase/TopLikedColors";
 
 // interface ColorArrProps {
@@ -34,7 +32,6 @@ const GetBrandPicker: React.FunctionComponent = () => {
   const [localBrandColor, setLocalBrandColor] = useState("#ac26cd");
   const [debouncedValue] = useDebounce(localBrandColor, 300);
   const brandArrWithShades = useGetColorArray(debouncedValue);
-  const hsl = useHexToHSL(debouncedValue);
 
   useEffect(() => {
     setBrandColor(debouncedValue);
@@ -56,24 +53,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
       <p className="text-gray-500 my-8 text-2xl">
         Choose a brand color to get started
       </p>
-      <div className="flex">
-        <div>
-          {/* Brand Color Circle */}
-          <div
-            style={{ background: brandColor }}
-            className="group flex items-center justify-center roup w-40 h-40 rounded-full"
-          >
-            <button
-              className={`outline-none focus:ring-1 border-none ${
-                hsl.l > 80 || hsl.s > 80 ? "text-gray-800" : "text-gray-50"
-              }`}
-              onClick={() => setShowColorName(!showColorName)}
-            >
-              {showColorName ? "Hide Name" : "Show Name"}
-            </button>
-          </div>
-        </div>
-
+      <div className="flex justify-around">
         <div className="ml-6">
           <HexColorPicker
             className="grab"
@@ -87,9 +67,8 @@ const GetBrandPicker: React.FunctionComponent = () => {
             onChange={handleBrandColor}
           />
         </div>
+        <TopLikedColors />
       </div>
-      <LikesCounter />
-      <TopLikedColors />
     </div>
   );
 };
