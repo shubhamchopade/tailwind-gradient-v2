@@ -30,16 +30,22 @@ const TopLikedColors: React.FunctionComponent = () => {
 
   return (
     <div>
+      <p className="text-xs text-gray-400 mb-4">most liked</p>
       {topFive.map((color, index) => {
         const { hex, likes } = color;
         return (
           <div
             onClick={() => handleLike(index)}
             key={index}
-            className="w-8 h-8 flex justify-center items-center rounded-full"
+            className="w-8 h-8 my-1 cursor-pointer flex justify-center items-center rounded-full"
             style={{ background: hex }}
           >
-            <p>{likes}</p>
+            <p
+              style={{ fontSize: "0.7rem" }}
+              className="backdrop-filter bg-white bg-opacity-30 px-0.5 rounded font-bold text-cerise-0"
+            >
+              {likes}
+            </p>
           </div>
         );
       })}

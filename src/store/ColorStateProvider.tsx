@@ -11,6 +11,8 @@ interface ProviderProps {
   setBrandColorPaletteArray: Function;
   getConfigFile: boolean;
   setGetConfigFile: React.Dispatch<React.SetStateAction<boolean>>;
+  isNameLoading: boolean;
+  setIsNameLoading: React.Dispatch<React.SetStateAction<boolean>>;
   currentCopiedHex: string;
   setCurrentCopiedHex: React.Dispatch<React.SetStateAction<string>>;
   likes: number;
@@ -51,6 +53,7 @@ export const ColorStateProvider: React.FC = ({ children }) => {
   const [brandColorPaletteArray, setBrandColorPaletteArray] = useState([]);
   const [currentCopiedHex, setCurrentCopiedHex] = useState("");
   const [likes, setLikes] = useState(0);
+  const [isNameLoading, setIsNameLoading] = useState(true);
 
   const providerValue: ProviderProps = {
     brandColor,
@@ -65,6 +68,8 @@ export const ColorStateProvider: React.FC = ({ children }) => {
     setCurrentCopiedHex,
     likes,
     setLikes,
+    isNameLoading,
+    setIsNameLoading,
   };
 
   return (

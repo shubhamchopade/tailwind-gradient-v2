@@ -7,6 +7,9 @@ module.exports = {
         "noto-sans": ["Noto Sans", "sans-serif"],
         "noto-serif": ["Noto Serif", "serif"],
       },
+      fontSize: {
+        xxs: "0.125rem",
+      },
       cursor: {
         grabbing: "grabbing",
         grab: "grab",

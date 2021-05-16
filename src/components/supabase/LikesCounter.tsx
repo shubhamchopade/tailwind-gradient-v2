@@ -74,20 +74,24 @@ const LikesCounter: React.FunctionComponent = () => {
 
   return (
     <div className="flex justify-center items-center mb-4">
-      <button onClick={handleCount}>
+      <button
+        className="btn rounded-sm group text-center"
+        onClick={handleCount}
+      >
         <svg
           width="30"
           height="27"
           viewBox="0 0 30 27"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="transform group-hover:scale-105"
         >
           <path
             d="M7.34456 0C3.28889 0 0 3.25511 0 7.27111C0 10.513 1.2853 18.2072 13.937 25.9851C14.1637 26.1229 14.4238 26.1959 14.6891 26.1959C14.9544 26.1959 15.2146 26.1229 15.4412 25.9851C28.0929 18.2072 29.3782 10.513 29.3782 7.27111C29.3782 3.25511 26.0893 0 22.0337 0C17.978 0 14.6891 4.40674 14.6891 4.40674C14.6891 4.40674 11.4002 0 7.34456 0Z"
             fill={brandColor}
           />
         </svg>
-        {isLoading ? "loading" : likes}
+        {isLoading ? "💫" : likes}
       </button>
     </div>
   );

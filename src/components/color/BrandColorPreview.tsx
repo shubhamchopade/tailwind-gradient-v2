@@ -6,8 +6,9 @@ import LikesCounter from "../supabase/LikesCounter";
 const BrandColorPreview: React.FunctionComponent = () => {
   const { brandColor, showColorName, setShowColorName } = useColorState();
   const hsl = useHexToHSL(brandColor);
+
   return (
-    <div>
+    <div className="mt-8 sm:mt-0">
       {/* Brand Color Circle */}
       <LikesCounter />
       <div
