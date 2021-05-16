@@ -5,7 +5,6 @@ function useBrandColorName(hex, length) {
   const { ntc, html, pantone, roygbiv, x11 } = names;
   let allColors = [...ntc, ...html, ...pantone, ...roygbiv, ...x11];
   let index = 0;
-
   function getNameString(allColors) {
     while (allColors[index].name.replace(/\s+/g, "").trim().length > length) {
       index++;

@@ -3,6 +3,7 @@ import { useDebounce } from "use-debounce/lib";
 import { supabaseQuery } from "../../data/supabase";
 import useBrandColorName from "../../hooks/useBrandColorName";
 import useHexToHSL from "../../hooks/useHexToHSL";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { useColorState } from "../../store/ColorStateProvider";
 
 const LikesCounter: React.FunctionComponent = () => {
@@ -11,6 +12,21 @@ const LikesCounter: React.FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError]: any = useState(null);
   const [currentColor, setCurrentColor]: any = useState(null);
+  const [, setIsLiked] = useLocalStorage(brandColor, "false");
+  const [count, setCount] = useState(
+    Boolean(localStorage.getItem(debouncedValue))
+  );
+
+  useEffect(() => {
+    setIsLiked(count);
+  }, [count]);
+
+  useEffect(() => {
+    console.log(localStorage.getItem(debouncedValue));
+    if (localStorage.getItem(debouncedValue) === null) {
+      setCount(Boolean(localStorage.getItem(debouncedValue)));
+    }
+  }, [debouncedValue]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,9 +35,9 @@ const LikesCounter: React.FunctionComponent = () => {
         .from("colors")
         .select("likes")
         .filter("id", "eq", debouncedValue);
-      const likes = data[0] && data[0].likes;
+      const likes = data && data[0] && data[0].likes;
       setLikes(likes || 0);
-      // console.log(likes);
+      console.log(likes);
       setIsLoading(false);
     }
     getLikes();
@@ -36,18 +52,15 @@ const LikesCounter: React.FunctionComponent = () => {
       // console.log(data, "insert");
       setCurrentColor(data);
 
-      console.log(currentColor);
-
-      if (likes > 0) {
-        let { error }: any = await supabaseQuery.from("colors").insert({
-          id: debouncedValue,
-          name: useBrandColorName(debouncedValue),
-          hex: debouncedValue,
-          hsl: useHexToHSL(debouncedValue),
-          likes: likes,
-        });
-        setError(error);
-      }
+      let { error }: any = await supabaseQuery.from("colors").insert({
+        id: debouncedValue,
+        name: useBrandColorName(debouncedValue),
+        hex: debouncedValue,
+        hsl: useHexToHSL(debouncedValue),
+        likes: likes,
+      });
+      console.log(error);
+      setError(error);
     }
     insertColor();
   }, [likes]);
@@ -69,7 +82,12 @@ const LikesCounter: React.FunctionComponent = () => {
   }, [error]);
 
   function handleCount() {
-    setLikes(likes + 1);
+    setCount(!count);
+    if (count) {
+      setLikes(likes + 1);
+    } else {
+      setLikes(likes - 1);
+    }
   }
 
   return (
@@ -91,7 +109,7 @@ const LikesCounter: React.FunctionComponent = () => {
             fill={brandColor}
           />
         </svg>
-        {isLoading ? "💫" : likes}
+        {isLoading ? "Loading" : likes}
       </button>
     </div>
   );
