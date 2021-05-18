@@ -7,13 +7,16 @@ import { reducer } from "./reducerFunction";
 const LikesCounter: React.FunctionComponent = () => {
   const { brandColor } = useColorState();
   const [debouncedValue] = useDebounce(brandColor, 300);
-  const toggleValueToBoolean = localStorage.getItem(debouncedValue);
+  const toggleValueToBoolean =
+    localStorage.getItem(debouncedValue) === "true" ? true : false;
 
   const initValues = {
     likes: 0,
     isLoading: true,
-    toggle: Boolean(toggleValueToBoolean),
+    toggle: toggleValueToBoolean,
   };
+
+  console.log(toggleValueToBoolean);
 
   const [state, dispatch] = useReducer(reducer, initValues);
 
@@ -28,7 +31,7 @@ const LikesCounter: React.FunctionComponent = () => {
       dispatch({
         type: "RESOLVED",
         likes: likes || 0,
-        toggle: Boolean(toggleValueToBoolean),
+        toggle: toggleValueToBoolean,
         debouncedValue: debouncedValue,
       });
     }
@@ -50,7 +53,9 @@ const LikesCounter: React.FunctionComponent = () => {
       );
       console.log(data);
     }
-    insertColor();
+    if (!state.isLoading) {
+      insertColor();
+    }
   }, [state.toggle]);
 
   function handleCount() {
@@ -83,7 +88,7 @@ const LikesCounter: React.FunctionComponent = () => {
             strokeWidth={3}
           />
         </svg>
-        {state.likes}
+        {!state.isLoading ? state.likes : "💫"}
       </button>
     </div>
   );
