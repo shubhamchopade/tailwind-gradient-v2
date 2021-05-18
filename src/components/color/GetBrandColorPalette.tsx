@@ -1,10 +1,12 @@
 import { useEffect } from "react";
+import { useDebounce } from "use-debounce/lib";
 import useBrandColorPalette from "../../hooks/useBrandColorPalette";
 import { useColorState } from "../../store/ColorStateProvider";
 
 const BrandColorPalette = () => {
   const { brandColor, setBrandColorPaletteArray } = useColorState();
-  const val = useBrandColorPalette(brandColor);
+  const [debouncedValue] = useDebounce(brandColor, 300);
+  const val = useBrandColorPalette(debouncedValue);
 
   useEffect(() => {
     setBrandColorPaletteArray(val);
