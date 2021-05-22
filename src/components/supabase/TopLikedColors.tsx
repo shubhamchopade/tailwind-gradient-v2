@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { supabaseQuery } from "../../data/supabase";
 import { useColorState } from "../../store/ColorStateProvider";
 
-const TopLikedColors: React.FunctionComponent = () => {
+interface Props {
+  setLocalBrandColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const TopLikedColors: React.FunctionComponent<Props> = ({
+  setLocalBrandColor,
+}) => {
   const [, setIsLoading] = useState(false);
   const [topFive, setTopFive] = useState([]);
-  const { setBrandColor, likes } = useColorState();
+  const { likes } = useColorState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,7 +31,7 @@ const TopLikedColors: React.FunctionComponent = () => {
   function handleLike(index: number) {
     let col = topFive[index];
     const { id } = col;
-    setBrandColor(id);
+    setLocalBrandColor(id);
   }
 
   return (

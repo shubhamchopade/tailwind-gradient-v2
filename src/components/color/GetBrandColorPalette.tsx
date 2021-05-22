@@ -8,9 +8,11 @@ const BrandColorPalette = () => {
   const [debouncedValue] = useDebounce(brandColor, 300);
   const val = useBrandColorPalette(debouncedValue);
 
+  console.log(val, brandColor);
+
   useEffect(() => {
     setBrandColorPaletteArray(val);
-  }, [brandColor]);
+  }, [debouncedValue]);
 
   return <section className="flex items-start justify-start pr-4"></section>;
 };

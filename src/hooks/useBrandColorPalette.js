@@ -9,24 +9,25 @@ function useBrandColorPalette(color) {
     i === 0 && arr.push({ h, s, l });
 
     if (h >= 300 && h <= 330) {
-      h -= 270;
+      h -= 36 * 8;
     } else if (h >= 331 && h <= 360) {
-      h -= 300;
+      h -= 36 * 5;
     } else if (h < 60) {
-      h += 80;
-    } else h += 40;
+      h += 36 * 2;
+    } else h += 36;
+
     if (s > 97) {
-      s -= 90 * Math.random();
+      s -= 90;
     } else if (s < 30) {
-      s += 50 * Math.random();
+      s += 50;
     } else {
-      s += 2 * Math.random();
+      s += 2;
     }
-    if (l < 30) {
-      l += 10;
-    } else if (l > 90) {
-      l -= 80;
-    }
+    // if (l < 30) {
+    //   l += 20;
+    // } else if (l > 90) {
+    //   l -= 80;
+    // }
     arr.push({ h, s, l });
   }
   // console.log(arr);

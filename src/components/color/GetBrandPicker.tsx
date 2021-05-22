@@ -29,7 +29,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
     setShowColorName,
     setBrandColorPaletteArray,
   } = useColorState();
-  const [localBrandColor, setLocalBrandColor] = useState("#ac26cd");
+  const [localBrandColor, setLocalBrandColor] = useState("#2d2fab");
   const [debouncedValue] = useDebounce(localBrandColor, 300);
   const brandArrWithShades = useGetColorArray(debouncedValue);
 
@@ -67,7 +67,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
             onChange={handleBrandColor}
           />
         </div>
-        <TopLikedColors />
+        <TopLikedColors setLocalBrandColor={setLocalBrandColor} />
       </div>
     </div>
   );

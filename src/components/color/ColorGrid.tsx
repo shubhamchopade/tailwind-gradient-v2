@@ -19,8 +19,12 @@ interface Shades {
 }
 
 const ColorGrid: React.FunctionComponent = () => {
-  const { brandColorPaletteArray, currentCopiedHex, setCurrentCopiedHex } =
-    useColorState();
+  const {
+    brandColorPaletteArray,
+    currentCopiedHex,
+    setCurrentCopiedHex,
+    showColorName,
+  } = useColorState();
 
   const handleCopy = (hex: string) => {
     setCurrentCopiedHex(hex);
@@ -33,11 +37,31 @@ const ColorGrid: React.FunctionComponent = () => {
     return () => clearTimeout(timer);
   }, [currentCopiedHex]);
 
+  const getColorShadeNumbers = (count: number) => {
+    const by = count;
+    const initial = count === 100 ? 50 : 0.5;
+    const arr = [];
+    arr[0] = initial;
+    for (let i = 1; i <= 9; i++) {
+      arr.push(count);
+      count += by;
+    }
+    return arr;
+  };
+
+  const shadeNumbers = getColorShadeNumbers(100);
+
   return (
     <div className="mt-12 sm:mr-32 mr-0 sm:ml-0 ml-16 relative">
       {currentCopiedHex.length > 0 && (
         <OverlayCopiedToClipboard hex={currentCopiedHex} />
       )}
+      {showColorName &&
+        shadeNumbers.map((shade, index) => (
+          <p key={index} className="pl-4 text-xs inline-block">
+            {shade}
+          </p>
+        ))}
       {brandColorPaletteArray.map((props: ColorArrProps, idx: number) => {
         const { name, lightnessPalette } = props;
         return (

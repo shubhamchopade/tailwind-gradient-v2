@@ -7,7 +7,7 @@ interface Props {
 const OverlayCopiedToClipboard: React.FunctionComponent<Props> = (props) => {
   return (
     <div>
-      <div className="w-full h-56 sm:h-72 transition  backdrop-filter backdrop-blur-sm bg-white bg-opacity-50 absolute top-0 left-0 z-10 rounded-md">
+      <div className="w-full h-56 sm:h-72 transition  backdrop-filter backdrop-blur-sm bg-white bg-opacity-50 absolute top-6 left-0 z-10 rounded-md">
         <div className="grid place-content-center text-center my-auto h-full text-gray-900">
           <p className="text-xl font-bold uppercase">COPIED</p>
           <h2 className="text-3xl sm:text-5xl font-black uppercase">

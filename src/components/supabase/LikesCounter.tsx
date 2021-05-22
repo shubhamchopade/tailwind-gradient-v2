@@ -16,8 +16,6 @@ const LikesCounter: React.FunctionComponent = () => {
     toggle: toggleValueToBoolean,
   };
 
-  console.log(toggleValueToBoolean);
-
   const [state, dispatch] = useReducer(reducer, initValues);
 
   useEffect(() => {
@@ -37,10 +35,6 @@ const LikesCounter: React.FunctionComponent = () => {
     }
     getLikes();
   }, [debouncedValue]);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   useEffect(() => {
     async function insertColor() {

@@ -47,7 +47,7 @@ export const useColorState: Function = () => {
 };
 
 export const ColorStateProvider: React.FC = ({ children }) => {
-  const [brandColor, setBrandColor] = useState("#ac26cd");
+  const [brandColor, setBrandColor] = useState("#2d2fab");
   const [showColorName, setShowColorName] = useState(false);
   const [getConfigFile, setGetConfigFile] = useState(false);
   const [brandColorPaletteArray, setBrandColorPaletteArray] = useState([]);

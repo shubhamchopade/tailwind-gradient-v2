@@ -14,9 +14,10 @@ function useGetColorArray(hex) {
     const paletteHex = useHSLToHex(hsl);
     const id = paletteHex.split("#")[1];
     const lightnessPalette = useGetLightnessPalette(hsl, id);
+    // console.log(lightnessPalette);
     return {
       id,
-      name: showColorName ? useBrandColorName(paletteHex, 8) : "",
+      name: showColorName ? useBrandColorName(paletteHex, 10) : "",
       hex: paletteHex,
       hsl,
       lightnessPalette,
