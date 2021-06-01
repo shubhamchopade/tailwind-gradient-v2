@@ -7,7 +7,6 @@ type ContainerType = {
 };
 
 const GradientBlock: React.FC<ContainerType> = ({ color, children }) => {
-  console.log("gradients");
   return (
     <div>
       {children}

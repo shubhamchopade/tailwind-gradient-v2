@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useColorState } from "../../store/ColorStateProvider";
 import Modal from "../common/Modal";
 import TailwindConfig from "../common/TailwindConfig";
+import GradientsGrid from "../gradient/GradientsGrid";
 import BrandColorPreview from "./BrandColorPreview";
 import ColorGrid from "./ColorGrid";
 import GetBrandPicker from "./GetBrandPicker";
@@ -41,6 +42,7 @@ export const BrandColor: React.FunctionComponent = () => {
           <TailwindConfig />
         </Modal>
       </div>
+      <GradientsGrid />
     </div>
   );
 };
