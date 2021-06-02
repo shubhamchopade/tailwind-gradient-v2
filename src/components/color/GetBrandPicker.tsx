@@ -35,6 +35,12 @@ const GetBrandPicker: React.FunctionComponent = () => {
   console.log(brandArrWithShades);
 
   useEffect(() => {
+    if (window.location.href.split("/")[3]) {
+      setLocalBrandColor(window.location.href.split("/")[3]);
+    }
+  }, []);
+
+  useEffect(() => {
     setBrandColor(debouncedValue);
     setBrandColorPaletteArray(brandArrWithShades);
   }, [localBrandColor, debouncedValue, showColorName]);
@@ -48,6 +54,7 @@ const GetBrandPicker: React.FunctionComponent = () => {
   };
 
   // console.log(brandArrWithShades);
+  console.log(window.location.href.split("/")[3]);
 
   return (
     <div className="flex flex-col justify-center font-noto-sans">
