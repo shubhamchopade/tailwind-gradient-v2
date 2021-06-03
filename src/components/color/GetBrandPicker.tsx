@@ -32,7 +32,12 @@ const GetBrandPicker: React.FunctionComponent = () => {
   const [localBrandColor, setLocalBrandColor] = useState("#2d2fab");
   const [debouncedValue] = useDebounce(localBrandColor, 300);
   const brandArrWithShades = useGetColorArray(debouncedValue);
-  console.log(brandArrWithShades);
+
+  useEffect(() => {
+    if (window.location.href.split("/")[3]) {
+      setLocalBrandColor(window.location.href.split("/")[3]);
+    }
+  }, []);
 
   useEffect(() => {
     setBrandColor(debouncedValue);

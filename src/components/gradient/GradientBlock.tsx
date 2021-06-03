@@ -4,13 +4,18 @@ import styled from "styled-components";
 type ContainerType = {
   color: string; ///Passing Optional Props
   children?: React.ReactNode;
+  onClick?: React.MouseEventHandler;
 };
 
-const GradientBlock: React.FC<ContainerType> = ({ color, children }) => {
+const GradientBlock: React.FC<ContainerType> = ({
+  color,
+  onClick,
+  children,
+}) => {
   return (
     <div>
       {children}
-      <StyledGradientBlock color={color} />
+      <StyledGradientBlock onClick={onClick} color={color} />
     </div>
   );
 };
